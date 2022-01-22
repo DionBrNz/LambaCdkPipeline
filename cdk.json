@@ -1,5 +1,5 @@
 {
-  "app": "dotnet run -p src/DeployLambda/DeployLambda.csproj",
+  "app": "dotnet run -p DeployLambda/DeployLambda.csproj",
   "watch": {
     "include": [
       "**"

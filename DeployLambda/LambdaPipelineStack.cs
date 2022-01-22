@@ -20,7 +20,7 @@ namespace DeployLambda
                     BuildEnvironment = new BuildEnvironment
                     {
                         BuildImage = LinuxBuildImage.AMAZON_LINUX_2_ARM_2,
-                        ComputeType = ComputeType.MEDIUM
+                        ComputeType = ComputeType.SMALL
                     }
                 })
             });
