@@ -1,0 +1,44 @@
+using Amazon.CDK;
+using Amazon.CDK.AWS.Lambda;
+using Constructs;
+using System.Collections.Generic;
+using AssetOptions = Amazon.CDK.AWS.S3.Assets.AssetOptions;
+
+
+namespace DeployLambda
+{
+    public class LambdaStack : Stack
+    {
+        internal LambdaStack(Construct scope, string id, IStackProps props = null) : base(scope, id, props)
+        {
+           IEnumerable<string> commands = new[]
+            {
+                "cd /asset-input",
+                "export DOTNET_CLI_HOME=\"/tmp/DOTNET_CLI_HOME\"",
+                "export PATH=\"$PATH:/tmp/DOTNET_CLI_HOME/.dotnet/tools\"",
+                "dotnet tool install -g Amazon.Lambda.Tools",
+                "dotnet lambda package -o output.zip",
+                "unzip -o -d /asset-output output.zip"
+            };
+
+            var function = new Function(this, "example-lambda", new FunctionProps
+            {
+                FunctionName = "ToUpper-Lambda",
+                Description = "Changes input to upper case",
+                Runtime = Runtime.DOTNET_CORE_3_1,
+                Handler = "ExampleLamba::ExampleLambda.Function::FunctionHandler",
+                Code = Code.FromAsset("./ExampleLambda/", new AssetOptions
+                {
+                    Bundling = new BundlingOptions
+                    {
+                        Image = Runtime.DOTNET_CORE_3_1.BundlingImage,
+                        Command = new []
+                        {
+                            "bash", "-c", string.Join(" && ", commands)
+                        }
+                    }
+                })
+            });
+        }
+    }
+}
