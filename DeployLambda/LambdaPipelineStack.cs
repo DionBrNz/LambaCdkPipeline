@@ -24,7 +24,7 @@ namespace DeployLambda
                     Commands = new string[] { "npm install -g aws-cdk", "cdk synth --output=cdk.out" },
                     BuildEnvironment = new BuildEnvironment
                     {
-                        BuildImage = LinuxBuildImage.STANDARD_5_0,
+                        BuildImage = LinuxBuildImage.AMAZON_LINUX_2_ARM_2,
                         ComputeType = ComputeType.SMALL,
                         Privileged = true,
                     }
