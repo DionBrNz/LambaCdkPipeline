@@ -26,7 +26,7 @@ namespace DeployLambda
                 FunctionName = "ToUpper-Lambda",
                 Description = "Changes input to upper case",
                 Runtime = Runtime.DOTNET_CORE_3_1,
-                Handler = "ExampleLamba::ExampleLambda.Function::FunctionHandler",
+                Handler = "ExampleLambda::ExampleLambda.Function::FunctionHandler",
                 Architecture = Architecture.ARM_64,
                 Code = Code.FromAsset("./ExampleLambda/", new AssetOptions
                 {
