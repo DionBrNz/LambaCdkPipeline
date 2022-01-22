@@ -11,6 +11,7 @@ namespace DeployLambda
         {
             var pipeline = new CodePipeline(this, "lambda-pipeline", new CodePipelineProps
             {
+                PipelineName = "example-lambda-pipeline",
                 SelfMutation =true,
                 Synth = new CodeBuildStep("build", new CodeBuildStepProps
                 {
