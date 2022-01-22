@@ -14,11 +14,7 @@ namespace DeployLambda
            IEnumerable<string> commands = new[]
             {
                 "cd /asset-input",
-                "export DOTNET_CLI_HOME=\"/tmp/DOTNET_CLI_HOME\"",
-                "export PATH=\"$PATH:/tmp/DOTNET_CLI_HOME/.dotnet/tools\"",
-                "dotnet tool install -g Amazon.Lambda.Tools",
-                "dotnet lambda package -o output.zip",
-                "unzip -o -d /asset-output output.zip"
+                "dotnet publish -c Release -r linux-x64 -p:PublishReadyToRun=true -o /asset-output"
             };
 
             var function = new Function(this, "example-lambda", new FunctionProps
