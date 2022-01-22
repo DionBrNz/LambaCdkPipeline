@@ -15,7 +15,7 @@ namespace DeployLambda
                 Synth = new CodeBuildStep("build", new CodeBuildStepProps
                 {
                     ProjectName = "example-lambda-synth",
-                    Input = CodePipelineSource.GitHub("DionBrNz/LambaCdkPipeline", "main"),
+                    Input = CodePipelineSource.GitHub("DionBrNz/LambaCdkPipeline", "master"),
                     Commands = new string[] { "npm install -g aws-cdk", "cdk synth --output=cdk.out" },
                     BuildEnvironment = new BuildEnvironment
                     {
