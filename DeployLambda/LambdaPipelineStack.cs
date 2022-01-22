@@ -12,19 +12,26 @@ namespace DeployLambda
             var pipeline = new CodePipeline(this, "lambda-pipeline", new CodePipelineProps
             {
                 PipelineName = "example-lambda-pipeline",
+                
                 SelfMutation =true,
                 Synth = new CodeBuildStep("build", new CodeBuildStepProps
                 {
                     ProjectName = "example-lambda-synth",
-                    Input = CodePipelineSource.GitHub("DionBrNz/LambaCdkPipeline", "master"),
+                    Input = CodePipelineSource.Connection("DionBrNz/LambaCdkPipeline", "master", new ConnectionSourceOptions
+                    {
+                        ConnectionArn = $"arn:aws:codestar-connections:{Region}:{Account}:connection/f6d21f24-21db-4453-8c18-86ed3e230da6"
+                    }),
                     Commands = new string[] { "npm install -g aws-cdk", "cdk synth --output=cdk.out" },
                     BuildEnvironment = new BuildEnvironment
                     {
-                        BuildImage = LinuxBuildImage.AMAZON_LINUX_2_ARM_2,
-                        ComputeType = ComputeType.SMALL
+                        BuildImage = LinuxBuildImage.STANDARD_5_0,
+                        ComputeType = ComputeType.SMALL,
+                        Privileged = true,
                     }
                 })
             });
+
+            
 
             pipeline.AddStage(new LambdaDeployStage(this, "lambda-deploy-stage"));
         }
