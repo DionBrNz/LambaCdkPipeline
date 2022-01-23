@@ -14,7 +14,7 @@ namespace DeployLambda
            IEnumerable<string> commands = new[]
             {
                 "cd /asset-input",
-                "dotnet publish -c Release -r linux-x64 -p:PublishReadyToRun=true -o /asset-output"
+                "dotnet publish -c Release -r linux-arm -p:PublishReadyToRun=true -o /asset-output"
             };
 
             var function = new Function(this, "example-lambda", new FunctionProps
