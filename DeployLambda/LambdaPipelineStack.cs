@@ -19,7 +19,7 @@ namespace DeployLambda
                     ProjectName = "example-lambda-synth",
                     Input = CodePipelineSource.Connection("DionBrNz/LambaCdkPipeline", "master", new ConnectionSourceOptions
                     {
-                        ConnectionArn = $"arn:aws:codestar-connections:{Region}:{Account}:connection/f6d21f24-21db-4453-8c18-86ed3e230da6"
+                        ConnectionArn = $"arn:aws:codestar-connections:{Region}:{Account}:connection/f6d21f24-21db-4453-8c18-86ed3e230da6" // Use the ARN of your CodeStar connection.
                     }),
                     Commands = new string[] { "npm install -g aws-cdk", "cdk synth --output=cdk.out" },
                     BuildEnvironment = new BuildEnvironment
