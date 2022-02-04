@@ -14,6 +14,7 @@ namespace DeployLambda
            IEnumerable<string> commands = new[]
             {
                 "cd /asset-input",
+                "export DOTNET_CLI_HOME=\"/tmp/DOTNET_CLI_HOME\"",
                 "dotnet publish -c Release -r linux-arm64 -p:PublishReadyToRun=true -o /asset-output"
             };
 
