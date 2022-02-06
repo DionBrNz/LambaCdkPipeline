@@ -1,4 +1,5 @@
 ﻿using Amazon.CDK;
+using System.Collections.Generic;
 
 namespace DeployLambda
 {
@@ -18,6 +19,10 @@ namespace DeployLambda
                 },
                 
             });
+
+            Tags.Of(app).Add("owner", "me");
+            Aspects.Of(app).Add(new TagAspect(new List<string>{"owner"}));
+            
             
             app.Synth();
         }
