@@ -35,8 +35,15 @@ namespace DeployLambda
                             "bash", "-c", string.Join(" && ", commands)
                         }
                     }
-                })
-            });
+                }),
+                CurrentVersionOptions = new VersionOptions
+                {
+                    RemovalPolicy = RemovalPolicy.RETAIN
+                }
+            });;
+
+            var version = function.CurrentVersion;
+            version.AddAlias("production");
         }
     }
 }
